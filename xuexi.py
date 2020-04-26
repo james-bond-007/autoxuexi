@@ -35,7 +35,7 @@ logging.basicConfig(level=logging.ERROR)
 
 
 global version
-version = '2.1.0'
+version = '2.1.1'
 
 
 def read_check(id, type):
@@ -212,7 +212,8 @@ class XUEXI:
             raise TimeoutError('Timeout')
 
         # resp_list = eval(resp.text)
-        resp_list = json.loads(resp.text)
+        # resp_list = json.loads(resp.text)
+        resp_list = resp.json()
 
         self.__exit_flag.clear()
 
@@ -259,7 +260,8 @@ class XUEXI:
             raise TimeoutError(error)
 
         # resp_list = eval(resp.text)
-        resp_list = json.loads(resp.text)
+        # resp_list = json.loads(resp.text)
+        resp_list = resp.json()
 
         self.__exit_flag.clear()
 
