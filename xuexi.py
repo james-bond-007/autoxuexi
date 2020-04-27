@@ -111,16 +111,19 @@ class XUEXI:
                 try:
                     WebDriverWait(self.driver, 60).until(expected_conditions.presence_of_element_located(
                         (By.ID, 'mobile')))
-                    for div in self.driver.find_elements_by_name('input'):
-                        print(div.text)
-                        if div.text == u'请输入手机号码':
-                            div.click()
-                            self.driver.find_element_by_id('mobile').send_keys(config['dingtalk']['username'])
-
-                        if div.text == u'请输入密码':
-                            div.click()
-                            self.driver.find_element_by_id('pwd').send_keys(config['dingtalk']['password'])
-
+                    # for div in self.driver.find_elements_by_name('input'):
+                    #     print(div.text)
+                    #     if div.text == u'请输入手机号码':
+                    #         div.click()
+                    #         self.driver.find_element_by_id('mobile').send_keys(config['dingtalk']['username'])
+                    #
+                    #     if div.text == u'请输入密码':
+                    #         div.click()
+                    #         self.driver.find_element_by_id('pwd').send_keys(config['dingtalk']['password'])
+                    self.driver.find_element_by_id('mobile').click()
+                    self.driver.find_element_by_id('mobile').send_keys(config['dingtalk']['username'])
+                    self.driver.find_element_by_id('pwd').click()
+                    self.driver.find_element_by_id('pwd').send_keys(config['dingtalk']['password'])
                     self.driver.find_element_by_id('loginBtn').click()
                 except Exception:
                     return False
@@ -233,7 +236,7 @@ class XUEXI:
 
                     self.driver.execute_script("""
                         (function(){
-                            if (document.documentElement.scrollTop + document.documentElement.clientHeight  >= document.documentElement.scrollHeight*0.9){
+                            if (document.documentElement.scrollTop + document.documentElement.clientHeight  >= document.documentElement.scrollHeight*0.7){
                                 document.title = 'scroll-done';}
                             })();
                             """)
@@ -655,11 +658,11 @@ class App():
     def start_click(self, sched_task=False):
         try:
             self.job.isAlive()
-            print(self.job.isAlive())
+            # print(self.job.isAlive())
         except AttributeError:
         # except:
             self.job = Job(sched_task=sched_task)
-            print(self.job.isAlive())
+            # print(self.job.isAlive())
         else:
             if not self.job.isAlive():
                 self.job = Job(sched_task=sched_task)
